@@ -43,9 +43,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
-//        reminder= getIntent().getStringExtra(MainFragment.REMINDER);
+        reminder= getIntent().getStringExtra(MainFragment.REMINDER);
 
-        reminder = "test";
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -86,13 +85,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-       LatLng tth = new LatLng(52.359264, 4.907751);
+//       LatLng tth = new LatLng(52.359264, 4.907751);
 
    //   LatLng tth = new LatLng(loc.getLatitude(),loc.getLongitude());
 
 //       Toast.makeText(this, (int) loc.getLatitude(), Toast.LENGTH_SHORT).show();
-        mMap.addMarker(new MarkerOptions().position(tth).title(reminder));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tth, 15));
+  //      mMap.addMarker(new MarkerOptions().position(tth).title(reminder));
+   //     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tth, 15));
     }
 
 
@@ -104,6 +103,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (reqCode == 1) {
             if (results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED) {
                 loc = getLocation();
+                LatLng tth = new LatLng(loc.getLatitude(),loc.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(tth).title(reminder));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tth, 15));
 
             }
         }
@@ -135,16 +137,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         else {
             loc = getLocation();
-            Log.d ("Test", "hallo");
-//            Toast.makeText(this, (int) loc.getLatitude(), Toast.LENGTH_SHORT).show();
             LatLng tth = new LatLng(loc.getLatitude(),loc.getLongitude());
-
-//       Toast.makeText(this, (int) loc.getLatitude(), Toast.LENGTH_SHORT).show();
             mMap.addMarker(new MarkerOptions().position(tth).title(reminder));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tth, 15));
-
         }
-
 
     }
 
